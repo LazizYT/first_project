@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SHINOBI // ZERO — Oni Samurai Cyber-Action RPG</title>
+    <meta name="description" content="Next-generation tactical cyber-action RPG. Master the dark convergence of ancient Oni bladecraft and military neural augments in Neo-Kyoto 2099." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Share+Tech+Mono&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <!-- Background cyber layers -->
+    <div class="cyber-background"></div>
+    <div class="scanline-overlay"></div>
+    <div id="screen-flash-overlay" class="screen-flash-overlay"></div>
+
+    <!-- Preloader Screen -->
+    <div id="preloader" class="preloader-overlay">
+      <div class="preloader-brand">SHINOBI <span class="logo-slash">//</span> ZERO</div>
+      <div class="preloader-bar-wrap">
+        <div id="preloader-bar" class="preloader-bar"></div>
+      </div>
+      <div id="preloader-status" class="preloader-status">SYNCING ONI SYNAPSE NODE [0%]</div>
+    </div>
+
+    <!-- =====================================================================
+         HERO SECTION (ONI SAMURAI CENTERPIECE)
+         ===================================================================== -->
+    <section id="hero" class="hero-section">
+      <!-- Massive Typographic Watermark behind 3D Oni Samurai -->
+      <div class="hero-watermark">SHINOBI</div>
+
+      <!-- 3D WebGL Canvas Container for Hero Oni Samurai -->
+      <div id="canvas-container"></div>
+
+      <!-- Top Navigation Bar -->
+      <header class="navbar">
+        <div class="brand-wrapper">
+          <a href="#hero" class="brand-logo">
+            <span>SHINOBI</span>
+            <span class="logo-slash">//</span>
+            <span class="logo-zero">ZERO</span>
+          </a>
+          <div class="build-pill">
+            <span class="status-dot"></span>
+            <span>BUILD 2.09.9 [ONLINE]</span>
+          </div>
+        </div>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#services-arsenal" class="nav-link">ARSENAL HELIX</a></li>
+            <li><a href="#operatives" class="nav-link">OPERATIVES</a></li>
+            <li><a href="#cyber-forge" class="nav-link">CYBER FORGE</a></li>
+            <li><a href="#synapse-raid" class="nav-link">SYNAPSE RAID</a></li>
+            <li><a href="#intel" class="nav-link">INTEL</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button id="sound-toggle" class="sound-toggle-btn" title="Toggle Sci-Fi SFX Audio">
+            <span id="sound-icon">🔈</span>
+            <span id="sound-text">SFX: OFF</span>
+          </button>
+          <button id="nav-cta-btn" class="cyber-btn-primary">INITIALIZE PROTOCOL</button>
+        </div>
+      </header>
+
+      <!-- Main Hero Stage Content -->
+      <div class="hero-content">
+        <!-- Left Narrative Column -->
+        <div class="hero-left-column">
+          <div class="tactical-tag">
+            <span>◆</span>
+            <span>CLASSIFIED // MK-IX ONI SAMURAI</span>
+          </div>
+
+          <h1 class="hero-title">
+            FEAR THE <br />
+            <span class="gradient-text">CRIMSON SHADOW</span>
+          </h1>
+
+          <p class="hero-description">
+            Where cursed Japanese bladecraft merges with high-frequency neural augments.
+            Awaken the demonic Oni cyber-frame, engage rogue syndicates, and strike before the light reaches their optics.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#services-arsenal" class="cyber-btn-large" style="text-decoration: none;">
+              <span>EXPLORE ARSENAL</span>
+              <span>↓</span>
+            </a>
+            <button id="cta-archive-btn" class="cyber-btn-secondary">
+              <span>▶</span>
+              <span>MISSION INTEL</span>
+            </button>
+          </div>
+
+          <div class="combat-specs-card">
+            <div class="spec-item">
+              <span class="spec-label">SYNAPSE SYNC</span>
+              <span class="spec-value">99.8%</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">AUGMENT CLASS</span>
+              <span class="spec-value">ONI-TITAN</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">ACTIVE AGENTS</span>
+              <span class="spec-value">64,280</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column (Tactical HUD & 3D Interactive Console) -->
+        <div class="hero-right-column">
+          <div class="hud-card">
+            <div class="hud-header">
+              <span class="hud-title">ONI OCULAR & GAZE TELEMETRY</span>
+              <span id="hud-status" class="build-pill">SYNCED</span>
+            </div>
+
+            <div class="hud-telemetry-grid">
+              <div class="telemetry-cell">
+                <span class="telemetry-label">HEAD YAW</span>
+                <span id="telemetry-yaw" class="telemetry-val">+0.0°</span>
+              </div>
+              <div class="telemetry-cell">
+                <span class="telemetry-label">HEAD PITCH</span>
+                <span id="telemetry-pitch" class="telemetry-val">+0.0°</span>
+              </div>
+              <div class="telemetry-cell">
+                <span class="telemetry-label">OCULAR STATE</span>
+                <span id="telemetry-blink" class="telemetry-val">TRACKING</span>
+              </div>
+              <div class="telemetry-cell">
+                <span class="telemetry-label">SYSTEM FPS</span>
+                <span id="telemetry-fps" class="telemetry-val">60 FPS</span>
+              </div>
+            </div>
+
+            <!-- Stance / Camera Switcher -->
+            <div class="control-section">
+              <span class="control-label">// CAMERA VIEWPORT MODE</span>
+              <div class="btn-group">
+                <button class="hud-tab-btn active" data-mode="combat">COMBAT</button>
+                <button class="hud-tab-btn" data-mode="portrait">PORTRAIT</button>
+                <button class="hud-tab-btn" data-mode="inspect">360° INSPECT</button>
+              </div>
+            </div>
+
+            <!-- Energy Core Selector -->
+            <div class="control-section">
+              <span class="control-label">// SYNAPSE ENERGY CORE</span>
+              <div class="energy-swatches">
+                <button class="color-swatch-btn active" data-color="0xff003c" style="color: #ff003c">
+                  <span class="swatch-pip" style="background: #ff003c"></span>
+                  <span>CRIMSON</span>
+                </button>
+                <button class="color-swatch-btn" data-color="0x00f0ff" style="color: #00f0ff">
+                  <span class="swatch-pip" style="background: #00f0ff"></span>
+                  <span>CYAN</span>
+                </button>
+                <button class="color-swatch-btn" data-color="0xffe600" style="color: #ffe600">
+                  <span class="swatch-pip" style="background: #ffe600"></span>
+                  <span>GOLD</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Manual Blink Trigger Button -->
+            <button id="trigger-blink-btn" class="hud-action-btn">
+              ⚡ TRIGGER OCULAR BLINK NOW
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Marquee Ticker -->
+      <div class="marquee-ticker-bar">
+        <div class="marquee-track">
+          <div class="marquee-item">
+            <span class="marquee-dot">●</span>
+            <span>NEO-KYOTO SECTOR 07: <span class="highlight">GRID SECURE</span></span>
+          </div>
+          <div class="marquee-item">
+            <span class="marquee-dot">●</span>
+            <span>CURSED BLADE SYNTHESIS: <span class="highlight">ACTIVE</span></span>
+          </div>
+          <div class="marquee-item">
+            <span class="marquee-dot">●</span>
+            <span>ONI SAMURAI FRAME: <span class="highlight">DEPLOYED</span></span>
+          </div>
+          <div class="marquee-item">
+            <span class="marquee-dot">●</span>
+            <span>GLOBAL REGISTERED OPERATIVES: <span class="highlight">64,280</span></span>
+          </div>
+          <!-- Duplicate set for seamless infinite loop -->
+          <div class="marquee-item">
+            <span class="marquee-dot">●</span>
+            <span>NEO-KYOTO SECTOR 07: <span class="highlight">GRID SECURE</span></span>
+          </div>
+          <div class="marquee-item">
+            <span class="marquee-dot">●</span>
+            <span>CURSED BLADE SYNTHESIS: <span class="highlight">ACTIVE</span></span>
+          </div>
+          <div class="marquee-item">
+            <span class="marquee-dot">●</span>
+            <span>ONI SAMURAI FRAME: <span class="highlight">DEPLOYED</span></span>
+          </div>
+          <div class="marquee-item">
+            <span class="marquee-dot">●</span>
+            <span>GLOBAL REGISTERED OPERATIVES: <span class="highlight">64,280</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 1: SPECIAL 3D SPIRAL HELIX GALLERY (ARSENAL SERVICE)
+         ===================================================================== -->
+    <section id="services-arsenal" class="spiral-section">
+      <div class="spiral-sticky-viewport">
+        <!-- Section Header Overlay -->
+        <div class="spiral-header-overlay">
+          <span class="spiral-tag">// SERVICE ARSENAL & COMBAT ARCHIVE</span>
+          <h2 class="spiral-title">THE CURSED <span class="gradient-text">FLAMING BLADE</span></h2>
+          <p class="spiral-instruction">▼ SCROLL TO ROTATE 3D HELIX CAROUSEL AROUND THE SWORD ▼</p>
+        </div>
+
+        <!-- Central 3D Vertical Flaming Sword Canvas -->
+        <div id="sword-canvas-container"></div>
+
+        <!-- 3D Orbiting Glassy Cards -->
+        <div class="spiral-cards-container">
+          <!-- 7 cards dynamically generated and transformed via spiralGallery.js -->
+        </div>
+
+        <!-- Bottom Status Bar -->
+        <div class="marquee-ticker-bar" style="border-bottom: none; background: rgba(8,3,5,0.85);">
+          <div class="marquee-track">
+            <div class="marquee-item">
+              <span class="marquee-dot">●</span>
+              <span>HELIX 3D PERSPECTIVE: <span class="highlight">7 ARSENAL UNITS IN ORBIT</span></span>
+            </div>
+            <div class="marquee-item">
+              <span class="marquee-dot">●</span>
+              <span>CENTRAL SWORD: <span class="highlight">RYUJIN MURAMASA MK-VII</span></span>
+            </div>
+            <div class="marquee-item">
+              <span class="marquee-dot">●</span>
+              <span>HOVER CARD: <span class="highlight">3D TACTICAL REVEAL & AUDIO SYNTHESIS</span></span>
+            </div>
+            <!-- Duplicate loop -->
+            <div class="marquee-item">
+              <span class="marquee-dot">●</span>
+              <span>HELIX 3D PERSPECTIVE: <span class="highlight">7 ARSENAL UNITS IN ORBIT</span></span>
+            </div>
+            <div class="marquee-item">
+              <span class="marquee-dot">●</span>
+              <span>CENTRAL SWORD: <span class="highlight">RYUJIN MURAMASA MK-VII</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 2: OPERATIVES & CYBERNETIC CLASSES SHOWCASE
+         ===================================================================== -->
+    <section id="operatives" class="operatives-section">
+      <div class="section-header-centered">
+        <span class="section-tag">// COMBAT SPECIALIZATIONS</span>
+        <h2 class="section-title">CHOOSE YOUR <span class="gradient-text">OPERATIVE</span></h2>
+        <p class="section-subtitle">
+          Each operative possesses unique neural implants, custom weapon loadouts, and forbidden ninjutsu augments engineered for syndicate eradication.
+        </p>
+      </div>
+
+      <div class="operatives-showcase-grid">
+        <!-- Class Navigation List -->
+        <div class="operatives-nav-list">
+          <button class="operative-tab-btn active" data-op="oni">
+            <div>
+              <span class="tab-op-name">HAYABUSA</span>
+              <span class="tab-op-role">ONI JUGGERNAUT // TANK</span>
+            </div>
+            <span class="tab-op-arrow">→</span>
+          </button>
+
+          <button class="operative-tab-btn" data-op="kage">
+            <div>
+              <span class="tab-op-name">KAGE</span>
+              <span class="tab-op-role">VOID ASSASSIN // STEALTH</span>
+            </div>
+            <span class="tab-op-arrow">→</span>
+          </button>
+
+          <button class="operative-tab-btn" data-op="raiden">
+            <div>
+              <span class="tab-op-name">RAIDEN</span>
+              <span class="tab-op-role">CHRONO STRIKER // DUELIST</span>
+            </div>
+            <span class="tab-op-arrow">→</span>
+          </button>
+
+          <button class="operative-tab-btn" data-op="valkyrie">
+            <div>
+              <span class="tab-op-name">VALKYRIE</span>
+              <span class="tab-op-role">NANITE REAPER // TACTICAL</span>
+            </div>
+            <span class="tab-op-arrow">→</span>
+          </button>
+        </div>
+
+        <!-- Active Operative Intel Display with 3D Holographic Parallax -->
+        <div id="op-display-card" class="operative-intel-card">
+          <div class="op-details-left">
+            <span id="op-tag" class="op-code-tag">// UNIT #01 // DEMONIC REACTION CORE</span>
+            <h3 id="op-name" class="op-full-name">HAYABUSA // ONI JUGGERNAUT</h3>
+            <p id="op-bio" class="op-bio">
+              Armed with heavy lacquered armor infused with synthetic demon essence. Commands dual flaming katanas and can absorb incoming kinetic damage to power catastrophic thermal shockwaves.
+            </p>
+
+            <!-- Interactive Tactical Loadout Module Switcher -->
+            <div class="loadout-section">
+              <span class="control-label">// ACTIVE COMBAT LOADOUT MODULE</span>
+              <div class="btn-group loadout-btn-group">
+                <button class="loadout-tab-btn active" data-slot="weapon">⚔ PRIMARY BLADE</button>
+                <button class="loadout-tab-btn" data-slot="neural">🧠 NEURAL CORE</button>
+                <button class="loadout-tab-btn" data-slot="augment">⚡ SPECIAL AUGMENT</button>
+              </div>
+              <div id="loadout-desc" class="loadout-desc-box">
+                EQUIPPED: MURAMASA MK-VII — Twin thermal katanas dealing +35% incendiary damage over time.
+              </div>
+            </div>
+
+            <div class="op-skills-list">
+              <div class="op-skill-item">
+                <span class="op-skill-badge">[PASSIVE]</span>
+                <span id="op-skill-1" class="op-skill-title">ONI RESILIENCE: Converts 35% damage taken into flame energy.</span>
+              </div>
+              <div class="op-skill-item">
+                <span class="op-skill-badge">[TACTICAL]</span>
+                <span id="op-skill-2" class="op-skill-title">RYUJIN SLASH: 360° fiery katana sweep igniting shields.</span>
+              </div>
+              <div class="op-skill-item">
+                <span class="op-skill-badge">[ULTIMATE]</span>
+                <span id="op-skill-3" class="op-skill-title">BERSERK ASCENSION: Overclocks ocular sensors & grants immunity.</span>
+              </div>
+            </div>
+
+            <div class="op-action-buttons">
+              <button id="op-select-btn" class="cyber-btn-large">
+                DEPLOY OPERATIVE
+              </button>
+              <button id="op-ultimate-btn" class="cyber-btn-secondary" style="border-color: var(--crimson-neon); color: #fff;">
+                🔥 TEST ULTIMATE ABILITY
+              </button>
+            </div>
+          </div>
+
+          <!-- Stats Bars & Interactive Synapse Overclock Simulator -->
+          <div class="op-stats-right">
+            <div class="stats-bars-wrap">
+              <div class="stat-bar-row">
+                <div class="stat-bar-header">
+                  <span>LETHALITY</span>
+                  <span id="stat-val-1">96%</span>
+                </div>
+                <div class="stat-bar-track">
+                  <div id="stat-bar-1" class="stat-bar-fill" style="width: 96%"></div>
+                </div>
+              </div>
+
+              <div class="stat-bar-row">
+                <div class="stat-bar-header">
+                  <span>ARMOR RATING</span>
+                  <span id="stat-val-2">92%</span>
+                </div>
+                <div class="stat-bar-track">
+                  <div id="stat-bar-2" class="stat-bar-fill" style="width: 92%"></div>
+                </div>
+              </div>
+
+              <div class="stat-bar-row">
+                <div class="stat-bar-header">
+                  <span>AGILITY</span>
+                  <span id="stat-val-3">74%</span>
+                </div>
+                <div class="stat-bar-track">
+                  <div id="stat-bar-3" class="stat-bar-fill" style="width: 74%"></div>
+                </div>
+              </div>
+
+              <div class="stat-bar-row">
+                <div class="stat-bar-header">
+                  <span>CYBER-SYNAPSE</span>
+                  <span id="stat-val-4">88%</span>
+                </div>
+                <div class="stat-bar-track">
+                  <div id="stat-bar-4" class="stat-bar-fill" style="width: 88%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Real-time Interactive Synapse Overclock Slider -->
+            <div class="overclock-simulator-card">
+              <div class="oc-header">
+                <span class="control-label">// SYNAPSE OVERCLOCK DRIVE</span>
+                <span id="oc-val-display" class="highlight" style="font-family: var(--font-mono); font-weight: 700;">+0%</span>
+              </div>
+              <input type="range" id="overclock-slider" min="0" max="100" value="0" class="cyber-slider" />
+
+              <div class="oc-metrics-grid">
+                <div class="oc-metric">
+                  <span class="oc-label">CALCULATED DPS</span>
+                  <span id="oc-dps" class="oc-val">14,800</span>
+                </div>
+                <div class="oc-metric">
+                  <span class="oc-label">CRIT CHANCE</span>
+                  <span id="oc-crit" class="oc-val">34%</span>
+                </div>
+                <div class="oc-metric">
+                  <span class="oc-label">CORE TEMP</span>
+                  <div style="display: flex; align-items: center; gap: 0.4rem;">
+                    <span id="oc-temp" class="oc-val">38°C</span>
+                    <span id="oc-alert" class="oc-status-badge">OPTIMAL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="combat-specs-card" style="margin-top: 1.2rem; width: 100%;">
+              <div class="spec-item">
+                <span class="spec-label">PREFERRED BLADE</span>
+                <span id="op-weapon" class="spec-value" style="font-size: 0.95rem;">MURAMASA MK-VII</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">THREAT LEVEL</span>
+                <span class="spec-value" style="font-size: 0.95rem;">OMEGA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         NEW SECTION: CYBER-FORGE // 3D WEAPON WORKSHOP
+         ===================================================================== -->
+    <section id="cyber-forge" class="forge-section">
+      <div class="section-header-centered">
+        <span class="section-tag">// WEAPONRY R&D & PLASMA SYNTHESIS</span>
+        <h2 class="section-title">THE CYBER <span class="gradient-text">FORGE</span></h2>
+        <p class="section-subtitle">
+          Craft your customized high-frequency cyber katana. Adjust alloy crystalline matrix, plasma core frequencies, and weapon overdrive parameters with live interactive synthesis.
+        </p>
+      </div>
+
+      <div class="forge-workbench-grid">
+        <!-- Left: Customizer Controls -->
+        <div class="forge-controls-card">
+          <div class="forge-control-group">
+            <span class="control-label">// 1. ELEMENTAL PLASMA CORE</span>
+            <div class="element-swatches-grid">
+              <button class="element-btn active" data-color="#ff003c" data-name="CRIMSON HELLFIRE" data-buff="+38% BURN DAMAGE">
+                <span class="element-pip" style="background: #ff003c"></span>
+                <span>🔥 CRIMSON HELLFIRE</span>
+              </button>
+              <button class="element-btn" data-color="#00f0ff" data-name="CRYO PLASMA" data-buff="+25% CHILL SLOW">
+                <span class="element-pip" style="background: #00f0ff"></span>
+                <span>❄ CRYO PLASMA</span>
+              </button>
+              <button class="element-btn" data-color="#b026ff" data-name="VOID MATRIX" data-buff="+45% PHASE PIERCE">
+                <span class="element-pip" style="background: #b026ff"></span>
+                <span>⚡ VOID MATRIX</span>
+              </button>
+              <button class="element-btn" data-color="#ffe600" data-name="SOLAR EMBER" data-buff="+50% CRIT DAMAGE">
+                <span class="element-pip" style="background: #ffe600"></span>
+                <span>🌟 SOLAR EMBER</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="forge-control-group">
+            <span class="control-label">// 2. ALLOY METALLURGY</span>
+            <div class="btn-group alloy-btn-group">
+              <button class="alloy-tab-btn active" data-alloy="DAMASCUS NANITE" data-dps="19,400" data-weight="HEAVY">DAMASCUS NANITE</button>
+              <button class="alloy-tab-btn" data-alloy="MONO GRAPHENE" data-dps="23,100" data-weight="LIGHT">MONO GRAPHENE</button>
+              <button class="alloy-tab-btn" data-alloy="VOID METEORITE" data-dps="26,800" data-weight="EXOTIC">VOID METEORITE</button>
+            </div>
+          </div>
+
+          <div class="forge-control-group">
+            <span class="control-label">// 3. BLADE EDGE MODIFIER</span>
+            <select id="forge-edge-select" class="cyber-select">
+              <option value="thermal">THERMAL OVERDRIVE COIL (+400°C ARC)</option>
+              <option value="siphon">NANITE SIPHON MATRIX (LIFESTEAL)</option>
+              <option value="tachyon">TACHYON SLICER (DEFLECTS BULLETS)</option>
+            </select>
+          </div>
+
+          <button id="forge-action-btn" class="cyber-btn-large" style="width: 100%; margin-top: 1rem;">
+            ⚡ FORGE THIS BLADE PROTOCOL
+          </button>
+        </div>
+
+        <!-- Right: Interactive Blade Canvas & Passport -->
+        <div class="forge-preview-card">
+          <div class="canvas-header-bar">
+            <span id="forge-blade-name" class="forge-blade-name">MURAMASA MK-IX [HELLFIRE]</span>
+            <span class="build-pill">LIVE PLASMA SYNC</span>
+          </div>
+
+          <!-- Interactive Blade Canvas Preview with Slice Trail Effect -->
+          <div class="forge-canvas-wrap">
+            <canvas id="forge-canvas" width="600" height="280"></canvas>
+            <div class="canvas-interactive-hint">MOVE CURSOR OVER BLADE TO TEST PLASMA CUT</div>
+          </div>
+
+          <!-- Real-time Specs Bar -->
+          <div class="forge-specs-grid">
+            <div class="spec-cell">
+              <span class="spec-label">BASE DPS</span>
+              <span id="forge-spec-dps" class="spec-val highlight">19,400</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-label">PLASMA PURITY</span>
+              <span id="forge-spec-purity" class="spec-val">99.8%</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-label">ATTACK DELAY</span>
+              <span id="forge-spec-speed" class="spec-val">0.09s</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-label">ACTIVE BUFF</span>
+              <span id="forge-spec-buff" class="spec-val" style="color: var(--crimson-neon)">+38% BURN</span>
+            </div>
+          </div>
+
+          <!-- Generated Serial Passport Badge -->
+          <div id="forge-passport" class="forge-passport-card" style="display: none;">
+            <div class="passport-header">
+              <span>FORGED WEAPON PASSPORT</span>
+              <span class="highlight">STATUS: CIPHER REGISTERED</span>
+            </div>
+            <div class="passport-body">
+              <div>
+                <span class="passport-label">SERIAL CODE:</span>
+                <span id="passport-serial" class="passport-val">#SNB-99-MURAMASA-7741</span>
+              </div>
+              <button id="copy-serial-btn" class="cyber-btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">
+                COPY SERIAL
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 3: SYNAPSE RAID & GLOBAL BOSS BATTLE
+         ===================================================================== -->
+    <section id="synapse-raid" class="raid-section">
+      <div class="raid-card">
+        <!-- Left: Global Boss Battle & Live Strikes -->
+        <div>
+          <span class="section-tag">// GLOBAL COMMUNITY RAID</span>
+          <h2 class="section-title">WORLD RAID: <span class="gradient-text">MECHA-OROCHI</span></h2>
+          <p class="section-subtitle">
+            A rogue superintelligence AI has hijacked Neo-Kyoto. 64,000+ operatives are attacking its neural firewall in real-time. Join the raid and strike the boss core!
+          </p>
+
+          <!-- Interactive Boss Health Bar -->
+          <div class="boss-health-card">
+            <div class="boss-header-row">
+              <div class="boss-name-group">
+                <span class="status-dot"></span>
+                <strong style="color: #fff; font-family: var(--font-display); letter-spacing: 0.08em;">MECHA-OROCHI // AI OVERMIND</strong>
+              </div>
+              <span id="boss-hp-text" class="highlight" style="font-family: var(--font-mono); font-weight: 700;">8,420,000 / 10,000,000 HP (84.2%)</span>
+            </div>
+            <div class="boss-hp-track">
+              <div id="boss-hp-fill" class="boss-hp-fill" style="width: 84.2%"></div>
+            </div>
+
+            <!-- Damage Floaters Animation Anchor -->
+            <div id="damage-container" class="damage-container"></div>
+
+            <div class="boss-strike-row">
+              <button id="raid-strike-btn" class="cyber-btn-large">
+                ⚔ LAUNCH SYNAPSE STRIKE [-35,000 HP]
+              </button>
+              <div class="strike-stats-hint">
+                <span>COMBO BONUS: <strong style="color: var(--gold-accent)">x3.2 CRIT</strong></span>
+              </div>
+            </div>
+
+            <!-- Live Combat Log Ticker -->
+            <div id="raid-combat-log" class="raid-combat-log">
+              <div class="combat-log-item">> [09:52:10] Agent V0ID executed RYUJIN IGNITION for 42,000 DMG!</div>
+              <div class="combat-log-item">> [09:52:14] Syndicate Strike synchronized: -85,000 Boss HP!</div>
+            </div>
+          </div>
+
+          <div class="platforms-row" style="margin-top: 1.5rem;">
+            <span class="platform-pill">PC / STEAM</span>
+            <span class="platform-pill">PLAYSTATION 5</span>
+            <span class="platform-pill">XBOX SERIES X</span>
+            <span class="platform-pill">EPIC GAMES</span>
+          </div>
+        </div>
+
+        <!-- Right: Neural Cipher Hacking & Callsign Passport -->
+        <div class="pre-reg-form">
+          <!-- Interactive Neural Cipher Bypass Puzzle -->
+          <div class="cipher-bypass-card">
+            <div class="cipher-header">
+              <span class="control-label">// MAINFRAME CIPHER BYPASS</span>
+              <span id="cipher-status-badge" class="oc-status-badge">STANDBY</span>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.8rem;">
+              Click the 4 frequency nodes in order (A → B → C → D) to override syndicate security:
+            </p>
+            <div class="cipher-nodes-grid">
+              <button class="cipher-node-btn" data-node="1">NODE A [120Hz]</button>
+              <button class="cipher-node-btn" data-node="2">NODE B [240Hz]</button>
+              <button class="cipher-node-btn" data-node="3">NODE C [360Hz]</button>
+              <button class="cipher-node-btn" data-node="4">NODE D [480Hz]</button>
+            </div>
+            <div id="cipher-message" class="cipher-message">CLICK NODES TO BEGIN FREQUENCY ALIGNMENT</div>
+          </div>
+
+          <!-- Pre-registration Form -->
+          <div style="margin-top: 1rem;">
+            <h3 style="font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.08em;">
+              SECURE YOUR CALLSIGN
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 0.3rem;">
+              Generate your official Shinobi Operative License & receive encrypted raid credentials.
+            </p>
+
+            <div class="input-group" style="margin-top: 0.8rem;">
+              <input id="agent-input" type="text" class="cyber-input" placeholder="ENTER CALLSIGN (e.g. RONIN_99)" />
+              <button id="pre-reg-submit-btn" class="cyber-btn-large" style="border-radius: 0; padding: 0.9rem 1.4rem;">
+                REGISTER
+              </button>
+            </div>
+
+            <!-- Generated Holographic Operative License Card -->
+            <div id="operative-license-card" class="operative-license-card" style="display: none;">
+              <div class="license-top">
+                <span class="license-brand">SHINOBI // SYNDICATE CLEARANCE</span>
+                <span class="license-tier">CLASS-S ONI</span>
+              </div>
+              <div class="license-middle">
+                <div class="license-avatar">👹</div>
+                <div class="license-data">
+                  <div class="license-callsign" id="license-callsign">RONIN_99</div>
+                  <div class="license-meta">NEURAL LINK: 99.8% // RANK: TITAN</div>
+                  <div class="license-id" id="license-id">ID: #SNB-992-KAGE-4182</div>
+                </div>
+              </div>
+              <div class="license-barcode">
+                ||| | |||| | ||||| || |||||| | ||| |||| | |||||
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         FOOTER: ADVANCED GAMING FOOTER
+         ===================================================================== -->
+    <footer id="intel" class="gaming-footer">
+      <div class="footer-top-grid">
+        <div>
+          <div class="brand-logo" style="margin-bottom: 0.6rem;">
+            <span>SHINOBI</span>
+            <span class="logo-slash">//</span>
+            <span class="logo-zero">ZERO</span>
+          </div>
+          <p class="footer-brand-desc">
+            A next-generation cyberpunk tactical RPG where ancient Japanese ninjutsu merges with cutting-edge neural augments. Powered by WebGL and Three.js.
+          </p>
+          <div style="margin-top: 1.2rem; display: flex; gap: 0.8rem;">
+            <div class="rating-badge">
+              <strong style="color: #fff;">ESRB M</strong>
+              <span>MATURE 17+ (BLOOD, VIOLENCE)</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">NAVIGATION</h4>
+          <ul class="footer-links-list">
+            <li><a href="#hero" class="footer-link">Hero Centerpiece</a></li>
+            <li><a href="#services-arsenal" class="footer-link">Arsenal 3D Helix</a></li>
+            <li><a href="#operatives" class="footer-link">Operatives & Classes</a></li>
+            <li><a href="#synapse-raid" class="footer-link">Synapse Raid</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">COMMUNITY</h4>
+          <ul class="footer-links-list">
+            <li><a href="#" class="footer-link">Discord Syndicate</a></li>
+            <li><a href="#" class="footer-link">X // Twitter Broadcast</a></li>
+            <li><a href="#" class="footer-link">Twitch Live Streams</a></li>
+            <li><a href="#" class="footer-link">YouTube Intel Dispatches</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">SYSTEM SPECS</h4>
+          <ul class="footer-links-list">
+            <li class="footer-link" style="color: var(--text-dim)">ENGINE: THREE.JS R186</li>
+            <li class="footer-link" style="color: var(--text-dim)">SERVER: NEO-KYOTO NODE 07</li>
+            <li class="footer-link" style="color: var(--text-dim)">ENCRYPTION: QUANTUM 4096-BIT</li>
+            <li class="footer-link" style="color: var(--crimson-bright)">BUILD: v2.09.9 STABLE</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>© 2099 SHINOBI ZERO STUDIOS. ALL RIGHTS RESERVED.</span>
+        <span>TACTICAL CYBER-ACTION RPG // PROJECT KURO</span>
+      </div>
+    </footer>
+
+    <!-- Transmission Archive Dialog Modal -->
+    <dialog id="briefing-dialog" class="briefing-dialog">
+      <div class="briefing-header">
+        <div class="brand-logo" style="font-size: 1.1rem">
+          <span>CLASSIFIED INTEL</span>
+          <span class="logo-slash">//</span>
+          <span class="logo-zero">DISPATCH</span>
+        </div>
+        <button id="briefing-close" class="briefing-close-btn">&times;</button>
+      </div>
+      <div class="briefing-body" style="font-size: 0.92rem; line-height: 1.6; color: #cbd5e1">
+        <p style="margin-bottom: 0.8rem">
+          <strong>OPERATIVE HAYABUSA [ONI SAMURAI CLASSIFIED]:</strong>
+          Infused with experimental high-frequency neural dampeners and demonic cybernetic armor. Possesses microscopic ocular telemetry sensors capable of tracking host cursor intent within 1.2ms.
+        </p>
+        <p style="margin-bottom: 0.8rem">
+          <strong>COMBAT DIRECTIVE:</strong>
+          Infiltrate the Megacorp server nexus in Neo-Kyoto. Terminate rogue AI overlords before the syndicate uploads the global consciousness patch.
+        </p>
+        <p style="color: var(--crimson-neon); font-family: var(--font-mono); font-size: 0.85rem">
+          STATUS: READY FOR DEPLOYMENT. STAND BY FOR DIRECT SYNAPSE LINK.
+        </p>
+      </div>
+    </dialog>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
