@@ -503,38 +503,18 @@ export class NinjaCharacter {
   }
 
   updateLookingAround(delta, now) {
-    const timeSinceMouseMove = now - this.lastMouseMoveTime;
-    const isMouseIdle = timeSinceMouseMove > 2400;
+    // ALWAYS track mouse cursor with subtle lifelike micro-breathing
+    const maxHeadYaw = 0.58;  // ~33 degrees
+    const maxHeadPitch = 0.35; // ~20 degrees
 
-    let targetHeadYaw = 0;
-    let targetHeadPitch = 0;
+    const breath = Math.sin(now * 0.0016) * 0.025;
+    const sway = Math.cos(now * 0.0011) * 0.02;
 
-    if (isMouseIdle) {
-      // Idle natural wandering gaze
-      if (now >= this.idleGaze.nextShiftTime) {
-        this.idleGaze.targetYaw = (Math.random() - 0.5) * 0.45;
-        this.idleGaze.targetPitch = (Math.random() - 0.5) * 0.25;
-        this.idleGaze.nextShiftTime = now + 2000 + Math.random() * 3000;
-      }
-
-      const breath = Math.sin(now * 0.0015) * 0.04;
-      const sway = Math.cos(now * 0.0009) * 0.05;
-
-      targetHeadYaw = this.idleGaze.targetYaw + sway;
-      targetHeadPitch = this.idleGaze.targetPitch + breath;
-    } else {
-      // USER FIX: Inverted tracking fixed!
-      // When cursor moves right (+X), samurai turns head RIGHT (+yaw)!
-      // When cursor moves left (-X), samurai turns head LEFT (-yaw)!
-      const maxHeadYaw = 0.55;  // ~32 degrees
-      const maxHeadPitch = 0.32; // ~18 degrees
-
-      targetHeadYaw = this.cursor.x * maxHeadYaw;
-      targetHeadPitch = -this.cursor.y * maxHeadPitch;
-    }
+    const targetHeadYaw = this.cursor.x * maxHeadYaw + sway;
+    const targetHeadPitch = -this.cursor.y * maxHeadPitch + breath;
 
     // Smooth pursuit damping
-    const lerpSpeed = isMouseIdle ? 2.5 : 5.5;
+    const lerpSpeed = 6.0;
     this.currentHeadRot.yaw += (targetHeadYaw - this.currentHeadRot.yaw) * delta * lerpSpeed;
     this.currentHeadRot.pitch += (targetHeadPitch - this.currentHeadRot.pitch) * delta * lerpSpeed;
 

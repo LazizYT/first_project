@@ -12,12 +12,15 @@ export class SwordScene {
     this.renderer = null;
     this.sword = null;
     this.treeGroup = null;
-    this.treeVertebrae = [];
     this.treeBranches = [];
     this.sporeParticles = null;
     this.sporeData = null;
     this.flameParticles = null;
     this.clock = new THREE.Clock();
+
+    // Interactive mouse tracking: sword and tree always follow cursor
+    this.mouse = { x: 0, y: 0 };
+    this.mouseSmooth = { x: 0, y: 0 };
 
     this.scrollProgress = 0;
     this.isLoaded = false;
@@ -51,7 +54,7 @@ export class SwordScene {
     // 4. Lighting
     this.setupLighting();
 
-    // 5. Active Theory-inspired 3D Sacred World Tree (Spine, Helical Ribbons, Canopy & Spore Vortex)
+    // 5. Active Theory-inspired 3D Sacred World Tree (Helical Ribbons, Canopy & Spore Vortex)
     this.setupTree();
 
     // 6. Fire / Ember Particles around Sword
@@ -60,8 +63,22 @@ export class SwordScene {
     // 7. Load Flaming Sword Model
     this.loadSword();
 
-    // 8. Resize event
+    // 8. Event listeners: resize and continuous mouse tracking
     window.addEventListener('resize', this.onResize.bind(this));
+    window.addEventListener('mousemove', this.onMouseMove.bind(this));
+    window.addEventListener('touchmove', this.onTouchMove.bind(this), { passive: true });
+  }
+
+  onMouseMove(e) {
+    this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    this.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  }
+
+  onTouchMove(e) {
+    if (e.touches && e.touches.length > 0) {
+      this.mouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+      this.mouse.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+    }
   }
 
   setupLighting() {
@@ -94,47 +111,7 @@ export class SwordScene {
   setupTree() {
     this.treeGroup = new THREE.Group();
 
-    // --- A. BIOMECHANICAL CENTRAL TRUNK & SPINE VERTEBRAE ---
-    this.treeVertebrae = [];
-    const vertCount = 20;
-    const vertHeight = 0.18;
-    const trunkMat = new THREE.MeshStandardMaterial({
-      color: 0x140407,
-      roughness: 0.25,
-      metalness: 0.9,
-      emissive: 0x45050f,
-      emissiveIntensity: 0.7,
-    });
-
-    const glowCoreMat = new THREE.MeshBasicMaterial({
-      color: 0xff003c,
-      transparent: true,
-      opacity: 0.8,
-      blending: THREE.AdditiveBlending,
-    });
-
-    for (let i = 0; i < vertCount; i++) {
-      const y = (i - vertCount / 2) * vertHeight * 1.1;
-      const progress = i / vertCount;
-      const radiusBase = 0.16 + Math.sin(progress * Math.PI) * 0.10 + (1 - progress) * 0.10;
-
-      // Open biomechanical vertebrae ring (hollow so sword blade shines through!)
-      const ringGeo = new THREE.TorusGeometry(radiusBase, 0.022, 10, 24);
-      const ring = new THREE.Mesh(ringGeo, trunkMat);
-      ring.position.y = y;
-      ring.rotation.x = Math.PI / 2;
-      ring.rotation.z = i * 0.25;
-
-      // Inner glowing core ring
-      const innerRingGeo = new THREE.TorusGeometry(radiusBase * 0.85, 0.008, 6, 20);
-      const innerRing = new THREE.Mesh(innerRingGeo, glowCoreMat);
-      ring.add(innerRing);
-
-      this.treeVertebrae.push({ mesh: ring, baseY: y, baseRotZ: i * 0.25, phase: i * 0.3 });
-      this.treeGroup.add(ring);
-    }
-
-    // --- B. ACTIVE THEORY ORGANIC HELICAL RIBBONS (DOUBLE HELIX) ---
+    // --- A. ACTIVE THEORY ORGANIC HELICAL RIBBONS (DOUBLE HELIX) ---
     // Two sweeping helical ribbons winding gracefully around the central axis
     const ribbonMat = new THREE.MeshStandardMaterial({
       color: 0x22050b,
@@ -388,24 +365,35 @@ export class SwordScene {
   }
 
   update(delta, now) {
-    // 1. Active Theory Sacred Cyber-Tree Animation
+    // 0. Smooth Mouse Tracking Interpolation (Always follows cursor)
+    const lerpFactor = Math.min(1.0, delta * 5.0);
+    this.mouseSmooth.x += (this.mouse.x - this.mouseSmooth.x) * lerpFactor;
+    this.mouseSmooth.y += (this.mouse.y - this.mouseSmooth.y) * lerpFactor;
+
+    // 1. Camera Subtle Parallax Following Mouse
+    if (this.camera) {
+      this.camera.position.x = this.mouseSmooth.x * 0.22;
+      this.camera.position.y = this.mouseSmooth.y * 0.16;
+      this.camera.lookAt(0, 0, 0);
+    }
+
+    // 2. Active Theory Sacred Cyber-Tree Animation
     if (this.treeGroup) {
-      // Tree overall rotation synced with scroll and continuous gentle drift
+      // Tree overall rotation synced with scroll, continuous gentle drift and mouse tracking
       const scrollRotation = this.scrollProgress * Math.PI * 2.8;
-      this.treeGroup.rotation.y = now * 0.0004 + scrollRotation;
+      const treeMouseYaw = this.mouseSmooth.x * 0.45;
+      const treeMousePitch = -this.mouseSmooth.y * 0.32;
 
-      // Harmonic undulating wave through vertebrae spine
-      if (this.treeVertebrae) {
-        this.treeVertebrae.forEach((v) => {
-          v.mesh.rotation.z = v.baseRotZ + Math.sin(now * 0.0014 + v.phase) * 0.12;
-          v.mesh.position.x = Math.sin(now * 0.001 + v.phase) * 0.02;
-        });
-      }
+      this.treeGroup.rotation.y = now * 0.0004 + scrollRotation + treeMouseYaw;
+      this.treeGroup.rotation.x = treeMousePitch;
+      this.treeGroup.rotation.z = -this.mouseSmooth.x * 0.16;
+      this.treeGroup.position.x = this.mouseSmooth.x * 0.09;
+      this.treeGroup.position.y = this.mouseSmooth.y * 0.06;
 
-      // Branch harmonic organic sway
+      // Branch harmonic organic sway reacting to motion
       if (this.treeBranches) {
         this.treeBranches.forEach((b) => {
-          b.mesh.rotation.z = Math.sin(now * 0.0012 + b.phase) * 0.05;
+          b.mesh.rotation.z = Math.sin(now * 0.0012 + b.phase) * 0.05 + this.mouseSmooth.x * 0.06;
         });
       }
 
@@ -436,16 +424,22 @@ export class SwordScene {
       }
     }
 
-    // 2. Central Sword rotation synchronized with Tree & Scroll
+    // 3. Central Sword ALWAYS following mouse cursor with rich 3D inertia
     if (this.sword) {
       const scrollRotation = this.scrollProgress * Math.PI * 2.8;
-      this.sword.rotation.y = now * 0.0004 + scrollRotation;
 
-      // Gentle vertical floating hover
-      this.sword.position.y = Math.sin(now * 0.0016) * 0.03;
+      // Sword orientation dynamically tracks mouse cursor
+      const mouseYaw = this.mouseSmooth.x * 0.75;
+      const mousePitch = -this.mouseSmooth.y * 0.48;
+      const mouseRoll = -this.mouseSmooth.x * 0.22;
 
-      // Subtle blade perspective tilt
-      this.sword.rotation.x = Math.sin(now * 0.001) * 0.02;
+      this.sword.rotation.y = now * 0.0004 + scrollRotation + mouseYaw;
+      this.sword.rotation.x = mousePitch + Math.sin(now * 0.001) * 0.02;
+      this.sword.rotation.z = mouseRoll;
+
+      // Dynamic position parallax toward cursor
+      this.sword.position.x = this.mouseSmooth.x * 0.15;
+      this.sword.position.y = this.mouseSmooth.y * 0.11 + Math.sin(now * 0.0016) * 0.03;
     }
 
     // 3. Flame light pulse

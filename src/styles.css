@@ -137,6 +137,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 2rem;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 0, 60, 0.2);
@@ -147,7 +148,8 @@ body {
 .brand-wrapper {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
+  flex-shrink: 0;
 }
 
 .brand-logo {

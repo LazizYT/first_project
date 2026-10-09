@@ -12,13 +12,13 @@ export class SpiralGallery {
     this.cardElements = [];
 
     this.cardData = [
-      { id: 1, title: 'RYUJIN IGNITION', type: 'video', media: './videos/video_1.mp4', tag: 'COMBAT // REEL', spec: 'FLAME: 3,200°C', desc: 'Direct combat telemetry demonstrating active flame edge and thermal plasma overdrive.' },
-      { id: 2, title: 'MURAMASA MK-VII', type: 'image', media: './images/card_1.jpg', tag: 'MYTHIC // BLADE', spec: 'DPS: 14,800', desc: 'Ancient nanite-forged katana with high-frequency thermal plasma core.' },
-      { id: 3, title: 'ONI WAR-CHEST', type: 'video', media: './videos/video_2.mp4', tag: 'ARMOR // REEL', spec: 'DEFENSE: TIER 5', desc: 'High-frequency telemetry of Oni Samurai reactive nano-composite plating.' },
-      { id: 4, title: 'DUAL CRIMSON SHADOW', type: 'image', media: './images/card_2.jpg', tag: 'EXECUTION // BLADES', spec: 'ATK SPEED: 0.12s', desc: 'Synchronized twin katanas infused with synthetic Oni malice.' },
-      { id: 5, title: 'COLOSSAL JUGGERNAUT', type: 'video', media: './videos/video_3.mp4', tag: 'SIEGE // REEL', spec: 'OUTPUT: 1.2 GW', desc: 'Subterranean reactor footage of the horned Oni Mech and plasma Odachi.' },
-      { id: 6, title: 'PHANTOM STEPPER', type: 'image', media: './images/card_3.jpg', tag: 'STEALTH // AUGMENT', spec: 'INVIS: 99.4%', desc: 'Bionic stealth suit capable of phase-shifting through defensive lasers.' },
-      { id: 7, title: 'NEO-KYOTO SECTOR 09', type: 'image', media: './images/card_5.jpg', tag: 'DISTRICT // MAP', spec: 'ALERT: MAXIMUM', desc: 'Rain-drenched neon metropolis controlled by rogue syndicate AI.' },
+      { id: 1, title: 'BLENDER 3D & HARD-SURFACE', type: 'video', media: './videos/video_1.mp4', tag: 'МОДУЛЬ 01 // BLENDER', spec: '3D МОДЕЛИРОВАНИЕ', desc: 'Моделирование клинков и кибер-оружия, топология под сабдив, развертка UV и запекание карт.' },
+      { id: 2, title: 'PBR ТЕКСТУРИРОВАНИЕ & МАТЕРИАЛЫ', type: 'image', media: './images/card_1.jpg', tag: 'МОДУЛЬ 02 // SUBSTANCE', spec: '4K PBR ТЕКСТУРЫ', desc: 'Процедурные текстуры металлов, эмиссионные маски, микро-царапины и физический рендеринг.' },
+      { id: 3, title: 'РИГГИНГ И АНИМАЦИЯ ПЕРСОНАЖЕЙ', type: 'video', media: './videos/video_2.mp4', tag: 'МОДУЛЬ 03 // ANIMATION', spec: 'IK / FK КИНЕМАТИКА', desc: 'Создание скелета для они-самурая, весовые карты (skinning), циклы движения и динамика ткани.' },
+      { id: 4, title: 'THREE.JS ЯДРО & СЦЕНОГРАФИЯ', type: 'image', media: './images/card_2.jpg', tag: 'МОДУЛЬ 04 // WEBGL CORE', spec: 'АРХИТЕКТУРА СЦЕН', desc: 'Интеграция 3D в браузер: камеры, PBR-освещение, оптимизация GLTF/GLB и тени в реальном времени.' },
+      { id: 5, title: 'GLSL ШЕЙДЕРЫ & ЧАСТИЦЫ', type: 'video', media: './videos/video_3.mp4', tag: 'МОДУЛЬ 05 // GLSL SHADERS', spec: 'КАСТОМНЫЙ КОД FX', desc: 'Написание вершинных и фрагментных шейдеров: вихри огня, аура персонажа, плазма и неон.' },
+      { id: 6, title: '3D ИНТЕРАКТИВ И ТРЕКИНГ МЫШИ', type: 'image', media: './images/card_3.jpg', tag: 'МОДУЛЬ 06 // INTERACTION', spec: 'ТРЕКИНГ КУРСОРА', desc: 'Связка движений мыши с поворотом костей персонажа, 3D-параллакс, scroll-driven физика.' },
+      { id: 7, title: 'ДИПЛОМНЫЙ ПРОЕКТ ДЛЯ AWWWARDS', type: 'image', media: './images/card_5.jpg', tag: 'МОДУЛЬ 07 // PORTFOLIO', spec: 'SITE OF THE DAY', desc: 'Создание коммерческого 3D-лендинга под ключ для вашего международного портфолио.' },
     ];
 
     this.init();

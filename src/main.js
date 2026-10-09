@@ -252,80 +252,80 @@ function bootstrapApp() {
   const opDisplayCard = document.getElementById('op-display-card');
   const opData = {
     oni: {
-      tag: '// UNIT #01 // DEMONIC REACTION CORE',
-      name: 'HAYABUSA // ONI JUGGERNAUT',
-      bio: 'Armed with heavy lacquered armor infused with synthetic demon essence. Commands dual flaming katanas and can absorb incoming kinetic damage to power catastrophic thermal shockwaves.',
+      tag: '// НАПРАВЛЕНИЕ #01 // WEBGL & THREE.JS',
+      name: '3D WEB DEVELOPER // THREE.JS',
+      bio: 'Создание интерактивных сайтов нового поколения. Освоение Three.js, кастомных шейдеров, физики, scroll-driven анимаций и оптимизации под 60–120 FPS.',
       skills: [
-        'ONI RESILIENCE: Converts 35% damage taken into flame energy.',
-        'RYUJIN SLASH: 360° fiery katana sweep igniting shields.',
-        'BERSERK ASCENSION: Overclocks ocular sensors & grants immunity.',
+        'THREE.JS CORE: Сцены, камеры, PBR-материалы и свет.',
+        'GLSL SHADERS: Кастомные визуальные эффекты и плазма.',
+        'PERFORMANCE: Оптимизация draw calls и мобильный WebGL.',
       ],
       loadouts: {
-        weapon: 'EQUIPPED: MURAMASA MK-VII — Twin thermal katanas dealing +35% incendiary damage over time.',
-        neural: 'EQUIPPED: ONI SYNAPSE CORE — Dampens kinetic shock by 40% and converts impact into rage energy.',
-        augment: 'EQUIPPED: HELLFIRE VENT — Releases 360° superheated thermal discharge on shield break.',
+        weapon: 'СТЕК: Three.js r186 + Vite + GLSL + WebGPU + GSAP ScrollTrigger.',
+        neural: 'ПОРТФОЛИО: 3 интерактивных 3D-лендинга уровня Awwwards Site of the Day.',
+        augment: 'КАРЬЕРА: Позиция Creative Frontend / 3D Web Dev от $2,800/мес.',
       },
-      weapon: 'MURAMASA MK-VII',
-      threat: 'OMEGA',
-      baseDps: 14800,
-      stats: [96, 92, 74, 88],
+      weapon: 'THREE.JS / WEBGL',
+      threat: 'TOP 5% HIGH',
+      baseDps: 2800,
+      stats: [98, 92, 85, 95],
     },
     kage: {
-      tag: '// UNIT #02 // SHADOW PHASE PROTOCOL',
-      name: 'KAGE // VOID ASSASSIN',
-      bio: 'Equipped with active nanite optical cloaking and twin high-frequency execution daggers. Flits through security sensor grids without leaving thermal signatures.',
+      tag: '// НАПРАВЛЕНИЕ #02 // HARD-SURFACE & MODELING',
+      name: '3D ARTIST // BLENDER & SUBSTANCE',
+      bio: 'Создание высокодетализированных 3D-моделей оружия, брони и техники. Идеальная топология, развертка, запекание high-to-low poly и реалистичные 4K PBR-текстуры.',
       skills: [
-        'VOID CLOAK: Complete invisibility for 6.5 seconds.',
-        'SHADOW BLINK: Instant teleport behind targeted hostile.',
-        'EXECUTIONER MATRIX: Critical strike multiplying damage by 400%.',
+        'HARD-SURFACE: Моделирование клинков, мехов и кибер-атрибутов.',
+        'UV & BAKING: Безупречная развертка, normal и ambient occlusion карты.',
+        'PBR TEXTURING: Физические материалы металлов, стекла и эмиссиона.',
       ],
       loadouts: {
-        weapon: 'EQUIPPED: TWIN VOID EDGES — Phase-shifted daggers bypassing 60% of physical ballistic armor.',
-        neural: 'EQUIPPED: GHOST PROTOCOL CHIP — Erases electromagnetic and thermal signatures from enemy radar.',
-        augment: 'EQUIPPED: CHRONO BLINK MODULE — Grants 2 rapid dashes that phase through hostile lasers.',
+        weapon: 'СТЕК: Blender 4.x + Substance 3D Painter + Marmoset Toolbag.',
+        neural: 'ПОРТФОЛИО: 5 законченных game-ready 3D-моделей для игр и веба.',
+        augment: 'КАРЬЕРА: Позиция 3D Hard-Surface Modeler от $2,400/мес.',
       },
-      weapon: 'TWIN VOID EDGES',
-      threat: 'LETHAL',
-      baseDps: 18400,
-      stats: [98, 48, 99, 92],
+      weapon: 'BLENDER / SUBSTANCE',
+      threat: 'PRO GRADE',
+      baseDps: 2400,
+      stats: [96, 94, 90, 88],
     },
     raiden: {
-      tag: '// UNIT #03 // TEMPORAL DISRUPTION CORE',
-      name: 'RAIDEN // CHRONO STRIKER',
-      bio: 'High-speed duelist powered by a quantum chronometer augment. Can manipulate local temporal fields to deflect projectiles and chain lightning-fast counter-attacks.',
+      tag: '// НАПРАВЛЕНИЕ #03 // TECHNICAL ARTIST',
+      name: 'TECH ARTIST // GLSL & VFX WIZARD',
+      bio: 'Связующее звено между искусством и программированием. Процедурная генерация миров, системы частиц на GPU, шейдерная математика и кинематографичный пост-процессинг.',
       skills: [
-        'CHRONO SHIFT: Rewind physical position by 2.0 seconds.',
-        'EMP BURST: Disables enemy cyber-implants and turrets.',
-        'TEMPORAL ACCELERATION: Speeds movement & attacks by 200%.',
+        'VERTEX DISPLACEMENT: Процедурные волны и искажения сетки.',
+        'GPU PARTICLES: Миллионы частиц с симуляцией гравитации.',
+        'POST-PROCESSING: Bloom, Film Grain, Depth of Field и кастомные пассы.',
       ],
       loadouts: {
-        weapon: 'EQUIPPED: TACHYON KATANA — Vibrates at quantum frequencies to deflect high-caliber kinetic rounds.',
-        neural: 'EQUIPPED: REACTION ACCELERATOR — Slows down perceived battlefield time by 300% during duels.',
-        augment: 'EQUIPPED: LIGHTNING COIL — Chains ionic electricity between up to 5 adjacent hostiles.',
+        weapon: 'СТЕК: GLSL + Three.js Postprocessing + TouchDesigner + WebGL2.',
+        neural: 'ПОРТФОЛИО: Библиотека из 12 кастомных кинематографичных шейдеров.',
+        augment: 'КАРЬЕРА: Позиция Technical Artist в топовых студиях от $3,500/мес.',
       },
-      weapon: 'TACHYON KATANA',
-      threat: 'CRITICAL',
-      baseDps: 16200,
-      stats: [91, 68, 94, 96],
+      weapon: 'GLSL / SHADERS',
+      threat: 'RARE TALENT',
+      baseDps: 3500,
+      stats: [99, 88, 97, 98],
     },
     valkyrie: {
-      tag: '// UNIT #04 // DRONE REAPER MATRIX',
-      name: 'VALKYRIE // NANITE REAPER',
-      bio: 'Tactical combat specialist accompanied by an autonomous swarm of nanite attack drones. Dominates perimeter control and deploys orbital precision strikes.',
+      tag: '// НАПРАВЛЕНИЕ #04 // CREATIVE DIRECTOR',
+      name: '3D CREATIVE DIRECTOR // FULL-STACK',
+      bio: 'Полный цикл продюсирования 3D-проектов: от арт-дирекшна и сценария до интерактивного релиза, звукового дизайна Web Audio и побед на международных конкурсах.',
       skills: [
-        'DRONE SWARM: Nanites shred enemy armor over time.',
-        'OVERCLOCK LINK: Boosts squad weapon reload and shield recovery.',
-        'ORBITAL LANCE: High-energy particle beam from low orbit.',
+        'ART DIRECTION: Кинематографичная композиция, свет и цветовые палитры.',
+        'AUDIO & SFX: Процедурный синтез звука через Web Audio API.',
+        'PRODUCTION: Управление разработкой, релиз на международных конкурсах.',
       ],
       loadouts: {
-        weapon: 'EQUIPPED: RAIL-LANCE MK-IV — High-velocity magnetic lance delivering devastating line pierce.',
-        neural: 'EQUIPPED: SWARM MATRIX OVERLORD — Commands 6 autonomous nanite micro-drones for perimeter defense.',
-        augment: 'EQUIPPED: ORBITAL TARGETING UPLINK — Calls down surgical laser strikes from orbital satellites.',
+        weapon: 'СТЕК: Full 3D Pipeline (Blender + Three.js + Web Audio + Figma).',
+        neural: 'ПОРТФОЛИО: Авторский дипломный проект уровня Site of the Year.',
+        augment: 'КАРЬЕРА: Собственная студия или позиция Lead Creative Director от $4,500/мес.',
       },
-      weapon: 'RAIL-LANCE MK-IV',
-      threat: 'ALPHA',
-      baseDps: 15600,
-      stats: [88, 78, 82, 99],
+      weapon: 'FULL 3D PIPELINE',
+      threat: 'ELITE TIER',
+      baseDps: 4500,
+      stats: [95, 96, 94, 99],
     },
   };
 
@@ -413,21 +413,24 @@ function bootstrapApp() {
     if (!ocSlider) return;
     const ocVal = parseInt(ocSlider.value, 10);
     const data = opData[currentOpKey] || opData.oni;
-    const base = data.baseDps || 14800;
+    const base = data.baseDps || 2800;
 
-    const calcDps = Math.round(base * (1 + ocVal * 0.016));
-    const calcCrit = Math.round(34 + ocVal * 0.48);
-    const calcTemp = Math.round(38 + ocVal * 0.72);
+    const calcSalary = Math.round(base * (1 + ocVal * 0.015));
+    const calcProjects = Math.round(3 + ocVal * 0.08);
+    let grade = 'JUNIOR PRO';
+    if (ocVal > 25) grade = 'MIDDLE DEV';
+    if (ocVal > 60) grade = 'SENIOR LEAD';
+    if (ocVal > 85) grade = 'ART DIRECTOR';
 
-    if (ocValDisplay) ocValDisplay.textContent = `+${ocVal}%`;
-    if (ocDps) ocDps.textContent = calcDps.toLocaleString();
-    if (ocCrit) ocCrit.textContent = `${calcCrit}%`;
-    if (ocTemp) ocTemp.textContent = `${calcTemp}°C`;
+    if (ocValDisplay) ocValDisplay.textContent = `+${ocVal}% ОПЫТА`;
+    if (ocDps) ocDps.textContent = `$${calcSalary.toLocaleString()}/мес`;
+    if (ocCrit) ocCrit.textContent = `${calcProjects} ПРОЕКТОВ`;
+    if (ocTemp) ocTemp.textContent = grade;
 
     if (ocAlert) {
-      if (calcTemp > 80) {
-        ocAlert.textContent = 'OVERHEAT WARNING!';
-        ocAlert.className = 'oc-status-badge warning';
+      if (ocVal > 80) {
+        ocAlert.textContent = 'TOP TIER';
+        ocAlert.className = 'oc-status-badge';
       } else {
         ocAlert.textContent = 'OPTIMAL';
         ocAlert.className = 'oc-status-badge';
@@ -728,9 +731,9 @@ function bootstrapApp() {
     });
   }
 
-  // 11. INTERACTIVE WORLD RAID BOSS & COMBAT STRIKES
-  let bossHp = 8420000;
-  const maxBossHp = 10000000;
+  // 11. INTERACTIVE COURSE REGISTRATION & SEAT RESERVATION
+  let remainingSeats = 5;
+  const totalSeats = 30;
   const bossHpText = document.getElementById('boss-hp-text');
   const bossHpFill = document.getElementById('boss-hp-fill');
   const raidStrikeBtn = document.getElementById('raid-strike-btn');
@@ -739,12 +742,14 @@ function bootstrapApp() {
 
   if (raidStrikeBtn) {
     raidStrikeBtn.addEventListener('click', () => {
-      const damage = 25000 + Math.floor(Math.random() * 28000);
-      bossHp = Math.max(0, bossHp - damage);
-      const pct = ((bossHp / maxBossHp) * 100).toFixed(1);
+      if (remainingSeats > 1) {
+        remainingSeats--;
+      }
+      const occupied = totalSeats - remainingSeats;
+      const pct = ((occupied / totalSeats) * 100).toFixed(1);
 
       if (bossHpText) {
-        bossHpText.textContent = `${bossHp.toLocaleString()} / ${maxBossHp.toLocaleString()} HP (${pct}%)`;
+        bossHpText.textContent = `ОСТАЛОСЬ ${remainingSeats} ИЗ ${totalSeats} МЕСТ (${pct}% ЗАНЯТО)`;
       }
       if (bossHpFill) {
         bossHpFill.style.width = `${pct}%`;
@@ -753,36 +758,37 @@ function bootstrapApp() {
       // Audio feedback
       sound.playImpact();
       sound.playBladeClash();
+      sound.playEnergySurge();
 
-      // Floating damage number
+      // Floating confirmation tag
       if (damageContainer) {
         const floater = document.createElement('div');
         floater.className = 'floating-damage-number';
-        floater.textContent = `-${damage.toLocaleString()} CRITICAL!`;
+        floater.textContent = `МЕСТО ЗАБРОНИРОВАНО (-30%)!`;
         const offsetLeft = (Math.random() - 0.5) * 80;
         floater.style.left = `calc(50% + ${offsetLeft}px)`;
         damageContainer.appendChild(floater);
         setTimeout(() => floater.remove(), 950);
       }
 
-      // Add to combat log
+      // Add to enrollment log
       if (combatLog) {
         const item = document.createElement('div');
         item.className = 'combat-log-item';
         const nowStr = new Date().toTimeString().split(' ')[0];
-        item.textContent = `> [${nowStr}] YOU struck MECHA-OROCHI for ${damage.toLocaleString()} CRIT DMG!`;
+        item.textContent = `> [${nowStr}] ВЫ забронировали место в группе со скидкой -30%! Осталось мест: ${remainingSeats}`;
         combatLog.prepend(item);
         if (combatLog.children.length > 5) {
           combatLog.removeChild(combatLog.lastChild);
         }
       }
 
-      // Confetti sparks
+      // Confetti burst
       confetti({
-        particleCount: 45,
-        spread: 60,
+        particleCount: 80,
+        spread: 75,
         origin: { y: 0.75 },
-        colors: ['#ff003c', '#ffe600', '#ffffff'],
+        colors: ['#ff003c', '#ffe600', '#00f0ff', '#ffffff'],
       });
     });
 
@@ -806,13 +812,13 @@ function bootstrapApp() {
 
         if (currentExpectedNode > 4) {
           if (cipherBadge) {
-            cipherBadge.textContent = 'BYPASSED [100%]';
+            cipherBadge.textContent = 'ТЕСТ ПРОЙДЕН [100%]';
             cipherBadge.style.borderColor = '#00f0ff';
             cipherBadge.style.color = '#00f0ff';
             cipherBadge.style.background = 'rgba(0, 240, 255, 0.3)';
           }
           if (cipherMsg) {
-            cipherMsg.textContent = '✔ ALL 4 NODES RESONATING. OVERCLOCK GRANTED!';
+            cipherMsg.textContent = '✔ ВСЕ 4 ЭТАПА ПАЙПЛАЙНА СОБРАНЫ! ВАМ НАЧИСЛЕН БОНУС.';
             cipherMsg.style.color = '#00f0ff';
           }
           sound.playHackSuccess();
@@ -824,7 +830,7 @@ function bootstrapApp() {
           });
         } else {
           if (cipherMsg) {
-            cipherMsg.textContent = `FREQUENCY HARMONIZING... [${currentExpectedNode - 1}/4 NODES SYNCED]`;
+            cipherMsg.textContent = `СБОРКА ПАЙПЛАЙНА... [${currentExpectedNode - 1}/4 ЭТАПОВ]`;
           }
         }
       } else {
@@ -833,7 +839,7 @@ function bootstrapApp() {
         currentExpectedNode = 1;
         cipherBtns.forEach((b) => b.classList.remove('aligned'));
         if (cipherMsg) {
-          cipherMsg.textContent = '⚠ FREQUENCY MISMATCH. SEQUENCE RESET TO NODE A.';
+          cipherMsg.textContent = '⚠ НЕВЕРНЫЙ ШАГ. ПОСЛЕДОВАТЕЛЬНОСТЬ СБРОШЕНА НА ШАГ A.';
         }
       }
     });
@@ -860,7 +866,7 @@ function bootstrapApp() {
       if (licenseCallsign) licenseCallsign.textContent = val.toUpperCase();
       if (licenseId) {
         const randId = Math.floor(1000 + Math.random() * 9000);
-        licenseId.textContent = `ID: #SNB-992-KAGE-${randId}`;
+        licenseId.textContent = `ID: #3D-ACADEMY-STUDENT-${randId}`;
       }
       if (licenseCard) {
         licenseCard.style.display = 'flex';
