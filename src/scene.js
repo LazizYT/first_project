@@ -72,12 +72,12 @@ export class WorldScene {
   }
 
   setupLighting() {
-    // Ambient fill light (deep crimson/navy)
-    this.ambientLight = new THREE.AmbientLight(0x1a060a, 1.3);
+    // Ambient fill light (deep subtle dark crimson/navy)
+    this.ambientLight = new THREE.AmbientLight(0x18090d, 1.1);
     this.scene.add(this.ambientLight);
 
-    // Key Light: Tactical spotlight from front-top
-    this.keyLight = new THREE.DirectionalLight(0xfff0ee, 2.8);
+    // Key Light: Crisp cinematic key light from front-top
+    this.keyLight = new THREE.DirectionalLight(0xffeedd, 2.1);
     this.keyLight.position.set(1.5, 3.5, 3.0);
     this.keyLight.castShadow = true;
     this.keyLight.shadow.mapSize.width = 1024;
@@ -85,22 +85,22 @@ export class WorldScene {
     this.keyLight.shadow.bias = -0.0005;
     this.scene.add(this.keyLight);
 
-    // Crimson Rim Light (Electric red back-left edge)
-    this.rimLightCyan = new THREE.SpotLight(0xff003c, 9.5, 10, Math.PI / 4, 0.4);
+    // Subtle edge rim light (toned down from 9.5 to 1.8 so model surfaces don't glow harshly)
+    this.rimLightCyan = new THREE.SpotLight(0xff003c, 1.8, 10, Math.PI / 4, 0.45);
     this.rimLightCyan.position.set(-2.5, 2.2, -1.8);
     this.rimLightCyan.target.position.set(0, 0.5, 0);
     this.scene.add(this.rimLightCyan);
     this.scene.add(this.rimLightCyan.target);
 
-    // Secondary Fire/Ruby Rim Light (Back-right dramatic edge)
-    this.rimLightMagenta = new THREE.SpotLight(0xff2a55, 7.5, 10, Math.PI / 4, 0.4);
+    // Secondary subtle rim light (toned down from 7.5 to 1.3)
+    this.rimLightMagenta = new THREE.SpotLight(0xff2a55, 1.3, 10, Math.PI / 4, 0.45);
     this.rimLightMagenta.position.set(2.5, 1.8, -1.8);
     this.rimLightMagenta.target.position.set(0, 0.5, 0);
     this.scene.add(this.rimLightMagenta);
     this.scene.add(this.rimLightMagenta.target);
 
-    // Intense Red Under-Glow Floor Light
-    this.floorGlow = new THREE.PointLight(0xff003c, 2.8, 3.5);
+    // Gentle floor shadow light (toned down from 2.8 to 0.7)
+    this.floorGlow = new THREE.PointLight(0xff003c, 0.7, 3.5);
     this.floorGlow.position.set(0, -1.2, 0);
     this.scene.add(this.floorGlow);
   }

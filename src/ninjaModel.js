@@ -117,9 +117,14 @@ export class NinjaCharacter {
         child.receiveShadow = true;
 
         if (child.material) {
-          child.material.roughness = Math.min(child.material.roughness ?? 0.5, 0.65);
-          child.material.metalness = Math.max(child.material.metalness ?? 0.35, 0.5);
-          child.material.envMapIntensity = 1.6;
+          // Dark samurai lacquer - no surface blowout or plastic glow
+          child.material.roughness = 0.72;
+          child.material.metalness = 0.35;
+          child.material.envMapIntensity = 0.45;
+          if (child.material.emissive) {
+            child.material.emissive.setHex(0x000000);
+            child.material.emissiveIntensity = 0;
+          }
           child.material.needsUpdate = true;
         }
       }
@@ -134,6 +139,9 @@ export class NinjaCharacter {
 
     // Setup glowing cyber ocular eyes and eyelids in Oni Mask!
     this.setupOcularAndEyelids(scale);
+
+    // Setup mystical demonic anime soul aura
+    this.setupAura(scale);
 
     // Setup holographic tactical pedestal
     this.setupPedestal();
@@ -207,10 +215,8 @@ export class NinjaCharacter {
       this.ocularGroups.push(ocularGroup);
     });
 
-    // Eye glow point light inside Oni demon mask
-    const eyeCenter = leftEyeLocal.clone().add(rightEyeLocal).multiplyScalar(0.5);
-    eyeCenter.z += 0.03;
-    this.eyeGlow = new THREE.PointLight(this.currentThemeColor, 2.0, 0.8);
+    // Subtle inner demonic gleam inside Oni demon mask (softened from 2.0 to 0.7)
+    this.eyeGlow = new THREE.PointLight(this.currentThemeColor, 0.7, 0.5);
     this.eyeGlow.position.copy(eyeCenter);
     this.headBone.add(this.eyeGlow);
   }
@@ -262,11 +268,158 @@ export class NinjaCharacter {
     this.root.add(pedestalGroup);
   }
 
+  setupAura(scale) {
+    this.auraGroup = new THREE.Group();
+
+    // 1. Dual-Layer Volumetric Radiant Aura Halo (feathers behind Oni's silhouette)
+    const auraCanvas = document.createElement('canvas');
+    auraCanvas.width = 256;
+    auraCanvas.height = 256;
+    const aCtx = auraCanvas.getContext('2d');
+    const aGrad = aCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
+    aGrad.addColorStop(0, 'rgba(255, 10, 60, 0.9)');
+    aGrad.addColorStop(0.35, 'rgba(255, 0, 60, 0.5)');
+    aGrad.addColorStop(0.7, 'rgba(180, 0, 50, 0.15)');
+    aGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    aCtx.fillStyle = aGrad;
+    aCtx.fillRect(0, 0, 256, 256);
+
+    const auraTex = new THREE.CanvasTexture(auraCanvas);
+    const auraPlaneGeo = new THREE.PlaneGeometry(2.6, 3.4);
+    this.auraPlaneMat = new THREE.MeshBasicMaterial({
+      map: auraTex,
+      color: this.currentThemeColor,
+      transparent: true,
+      opacity: 0.65,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+    });
+    this.auraPlane = new THREE.Mesh(auraPlaneGeo, this.auraPlaneMat);
+    // Positioned directly behind Oni's torso and head
+    this.auraPlane.position.set(0, 1.35, -0.28);
+    this.auraGroup.add(this.auraPlane);
+
+    // Inner fiery aura core
+    const innerAuraGeo = new THREE.PlaneGeometry(1.6, 2.2);
+    this.innerAuraMat = new THREE.MeshBasicMaterial({
+      map: auraTex,
+      color: this.currentThemeColor,
+      transparent: true,
+      opacity: 0.55,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+    });
+    this.innerAuraPlane = new THREE.Mesh(innerAuraGeo, this.innerAuraMat);
+    this.innerAuraPlane.position.set(0, 1.35, -0.24);
+    this.auraGroup.add(this.innerAuraPlane);
+
+    // 2. Rising Demonic Soul Wisps & Flame Particles (Chakra Flames)
+    const pCount = 280;
+    const pGeo = new THREE.BufferGeometry();
+    const pos = new Float32Array(pCount * 3);
+    const speeds = new Float32Array(pCount);
+    const radii = new Float32Array(pCount);
+    const angles = new Float32Array(pCount);
+    const heights = new Float32Array(pCount);
+
+    for (let i = 0; i < pCount; i++) {
+      angles[i] = Math.random() * Math.PI * 2;
+      radii[i] = 0.2 + Math.random() * 0.48;
+      heights[i] = Math.random() * 2.4;
+      speeds[i] = 0.45 + Math.random() * 0.65;
+
+      pos[i * 3] = Math.cos(angles[i]) * radii[i];
+      pos[i * 3 + 1] = heights[i];
+      pos[i * 3 + 2] = Math.sin(angles[i]) * radii[i] * 0.9;
+    }
+
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    this.auraParticleData = { speeds, radii, angles, heights };
+
+    // Soft glowing circle texture for aura embers
+    const dotCanvas = document.createElement('canvas');
+    dotCanvas.width = 64;
+    dotCanvas.height = 64;
+    const dotCtx = dotCanvas.getContext('2d');
+    const dotGrad = dotCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    dotGrad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    dotGrad.addColorStop(0.3, 'rgba(255, 0, 60, 0.85)');
+    dotGrad.addColorStop(0.7, 'rgba(200, 0, 50, 0.25)');
+    dotGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    dotCtx.fillStyle = dotGrad;
+    dotCtx.fillRect(0, 0, 64, 64);
+    const dotTex = new THREE.CanvasTexture(dotCanvas);
+
+    this.auraParticleMat = new THREE.PointsMaterial({
+      map: dotTex,
+      size: 0.085,
+      color: this.currentThemeColor,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    this.auraParticles = new THREE.Points(pGeo, this.auraParticleMat);
+    this.auraGroup.add(this.auraParticles);
+
+    this.root.add(this.auraGroup);
+  }
+
+  updateAura(delta, now) {
+    if (!this.auraGroup) return;
+
+    // Pulse the demonic aura halo
+    if (this.auraPlane) {
+      const breath = Math.sin(now * 0.002) * 0.08;
+      this.auraPlane.scale.set(1 + breath, 1 + breath * 1.25, 1);
+      if (this.auraPlaneMat) {
+        this.auraPlaneMat.opacity = 0.55 + Math.sin(now * 0.003) * 0.15;
+      }
+    }
+
+    if (this.innerAuraPlane) {
+      const breathInner = Math.cos(now * 0.0025) * 0.1;
+      this.innerAuraPlane.scale.set(1 + breathInner, 1 + breathInner * 1.2, 1);
+    }
+
+    // Rise and swirl the soul particles around Oni's silhouette
+    if (this.auraParticles && this.auraParticleData) {
+      const pos = this.auraParticles.geometry.attributes.position.array;
+      const { speeds, radii, angles, heights } = this.auraParticleData;
+      const count = speeds.length;
+
+      for (let i = 0; i < count; i++) {
+        heights[i] += speeds[i] * delta * 0.95;
+        angles[i] += delta * (1.1 + speeds[i] * 0.9);
+
+        if (heights[i] > 2.45) {
+          heights[i] = 0.02 + Math.random() * 0.15;
+          angles[i] = Math.random() * Math.PI * 2;
+          radii[i] = 0.2 + Math.random() * 0.45;
+        }
+
+        // Slight organic expansion at shoulders, taper at head
+        const currentRad = radii[i] * (1.0 + Math.sin(heights[i] * 1.8) * 0.22);
+
+        pos[i * 3] = Math.cos(angles[i]) * currentRad;
+        pos[i * 3 + 1] = heights[i];
+        pos[i * 3 + 2] = Math.sin(angles[i]) * currentRad * 0.85;
+      }
+      this.auraParticles.geometry.attributes.position.needsUpdate = true;
+    }
+  }
+
   setThemeColor(hexColor) {
     this.currentThemeColor = hexColor;
     if (this.ringMat) this.ringMat.color.setHex(hexColor);
     if (this.outerRingMat) this.outerRingMat.color.setHex(hexColor);
     if (this.eyeGlow) this.eyeGlow.color.setHex(hexColor);
+    if (this.auraPlaneMat) this.auraPlaneMat.color.setHex(hexColor);
+    if (this.innerAuraMat) this.innerAuraMat.color.setHex(hexColor);
+    if (this.auraParticleMat) this.auraParticleMat.color.setHex(hexColor);
 
     this.ocularRings.forEach((ring) => {
       ring.material.color.setHex(hexColor);
@@ -453,5 +606,6 @@ export class NinjaCharacter {
 
     this.updateBlinking(now);
     this.updateLookingAround(delta, now);
+    this.updateAura(delta, now);
   }
 }

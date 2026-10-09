@@ -299,15 +299,16 @@ body {
   transform: translateY(-1px);
 }
 
-/* Hero Content Grid */
+/* Hero Content */
 .hero-content {
   flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   align-items: center;
-  padding: 1.5rem 3.5rem;
+  justify-content: flex-start;
+  padding: 1.5rem 4.5rem;
   position: relative;
   z-index: 10;
+  pointer-events: none;
 }
 
 /* Left Narrative Column */
